@@ -13,7 +13,7 @@ Live demo is hosted [here](https://sleepy-woodland-21819.herokuapp.com/) (hosted
 
    - If you'd like to lint this, run `yarn lint`
 
-4. Run `yarn start`
+4. Run `yarn dev`
 5. The infoscreen will be available at [http://localhost:3000/](http://localhost:3000/)
 
 Or use the provided Dockerfile: Run `docker build -t timetables:dev .`, then run `docker run -p 3000:3000 timetables:dev` and head to [http://localhost:3000/](http://localhost:3000/).
