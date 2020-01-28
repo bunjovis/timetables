@@ -1,0 +1,13 @@
+.transportlogo {
+  height: 20vh;
+}
+.leg {
+  display: flex;
+  align-items: center;
+}
+.tostring {
+  color: red;
+}
+.fromstring {
+  color: green;
+}
