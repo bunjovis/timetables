@@ -15,8 +15,8 @@ const logos = {
 const Itinerary = props => {
   const itinerary = props.data;
   return itinerary.legs.map((leg, key) => {
-    const startDateString = createStartDateString(new Date(leg.startTime));
-    const endDateString = createEndDateString(new Date(leg.endTime));
+    const startDateString = createTimeString(new Date(leg.startTime));
+    const endDateString = createTimeString(new Date(leg.endTime));
     const fromString = createFromString(leg.from);
     const toString = createToString(leg.to);
     const durationString = `${Math.ceil(leg.duration / 60)} min`;
@@ -37,11 +37,11 @@ const Itinerary = props => {
         <div>
           Start time: {startDateString}
           <br />
-          From: <span class="fromstring">{fromString}</span>
+          From: <span className="fromstring">{fromString}</span>
           <br />
           End time: {endDateString}
           <br />
-          To: <span class="tostring">{toString}</span>
+          To: <span className="tostring">{toString}</span>
           <br />
           Duration: {durationString}
         </div>
@@ -59,15 +59,14 @@ function createFromString(from) {
 function createToString(to) {
   // If stop is null, the location must be Helsinki train station
   if (to.stop == null) {
-    return `Helsinki train station`;
+    return `Helsinki railway station`;
   }
   return to.stop.name;
 }
-function createStartDateString(startTime) {
-  return `${startTime.getHours()}:${startTime.getMinutes()}`;
-}
-function createEndDateString(endTime) {
-  return `${endTime.getHours()}:${endTime.getMinutes()}`;
+function createTimeString(time) {
+  return `${time.getHours() < 10 ? `0${time.getHours()}` : time.getHours()}:${
+    time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes()
+  }`;
 }
 function createLegMapString(leg) {
   return `https://www.mapquestapi.com/staticmap/v5/map?key=HVMFDycJdaaG0wJGrEKizGFJO5wyWrfp&size=200,200&locations=${leg.from.lat},${leg.from.lon}|marker-start||${leg.to.lat},${leg.to.lon}|marker-end`;

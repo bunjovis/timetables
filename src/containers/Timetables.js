@@ -1,7 +1,9 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
+
 import './Timetables.css';
 import Itinerary from '../components/Itinerary';
+
 const testData = {
   data: {
     plan: {
@@ -316,20 +318,77 @@ const testData2 = {
 class Timetables extends React.Component {
   constructor() {
     super();
-    this.state = { testing: testData2 };
+    this.state = { itineraries: [] };
+    this.fetchItineraries = this.fetchItineraries.bind(this);
+    this.fetchItineraries();
+    setInterval(this.fetchItineraries, 60000);
+  }
+
+  componentDidMount() {}
+
+  fetchItineraries() {
+    fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `query {
+          plan(
+            fromPlace: "Eficode headquarters::60.1697351,24.9257659"
+            toPlace: "Helsinki train station::60.171199,24.941295"
+            numItineraries: 3
+        
+          ) {
+            itineraries {
+                duration
+              legs {
+                startTime
+                endTime
+                mode
+                duration
+                from {
+                    lon
+                    lat
+                    stop {
+                        name
+                    }
+                }
+                to {
+                    lon
+                        lat
+                    stop {
+                        name
+                    }
+                }
+              }
+            }
+          }
+        }`,
+      }),
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(resJson => {
+        this.setState({ itineraries: resJson.data.plan.itineraries });
+      });
   }
 
   render() {
+    if (this.state.itineraries[0] == undefined) {
+      return <div>Loading data...</div>;
+    }
     return (
       <div id="timetables">
         <Row className="itinerary">
-          <Itinerary data={this.state.testing.data.plan.itineraries[0]} />
+          <Itinerary data={this.state.itineraries[0]} />
         </Row>
         <Row className="itinerary">
-          <Itinerary data={this.state.testing.data.plan.itineraries[1]} />
+          <Itinerary data={this.state.itineraries[1]} />
         </Row>
         <Row className="itinerary">
-          <Itinerary data={this.state.testing.data.plan.itineraries[2]} />
+          <Itinerary data={this.state.itineraries[2]} />
         </Row>
       </div>
     );

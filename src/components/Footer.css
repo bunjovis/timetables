@@ -4,4 +4,5 @@ footer {
   position: fixed;
   min-height: 5vh;
   min-width: 100vw;
+  text-align: center;
 }
