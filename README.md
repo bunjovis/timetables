@@ -3,6 +3,8 @@
 This project was made for Eficodes summer job application. You can see the assignment [here](https://github.com/eficode/assignment-timetables).
 The project is an infoscreen that display public transportation timetables between Eficode headquarters and Helsinki railway station (because you can get to Tampere from there :D). It uses fetch to get data from [HSL open data interface](https://www.hsl.fi/en/opendata) with GraphQL and displays it in a React application that uses [React Bootstrap](https://react-bootstrap.github.io/).
 
+Live demo is hosted [here](https://sleepy-woodland-21819.herokuapp.com/) (hosted at [Heroku](https://www.heroku.com), so please allow it a moment to load if it's shut down).
+
 ## Installation & running
 
 1. Download or clone this repository
