@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (
-    <Container>
+    <Container fluid>
       <Row>
         <Header />
       </Row>

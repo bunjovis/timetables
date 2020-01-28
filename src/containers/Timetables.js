@@ -20,9 +20,9 @@ const testData = {
                 stop: null,
               },
               to: {
+                lon: 24.931215,
+                lat: 60.16883,
                 stop: {
-                  lon: 24.931215,
-                  lat: 60.16883,
                   name: 'Kamppi',
                 },
               },
@@ -151,18 +151,185 @@ const testData = {
     },
   },
 };
+const testData2 = {
+  data: {
+    plan: {
+      itineraries: [
+        {
+          walkDistance: 751.8871538595846,
+          duration: 739,
+          legs: [
+            {
+              startTime: 1580034588000,
+              endTime: 1580035027000,
+              mode: 'WALK',
+              duration: 439.0,
+              distance: 496.4060000000001,
+              from: {
+                lon: 24.9257659,
+                lat: 60.1697351,
+                stop: null,
+              },
+              to: {
+                lon: 24.931215,
+                lat: 60.16883,
+                stop: {
+                  name: 'Kamppi',
+                },
+              },
+            },
+            {
+              startTime: 1580035027000,
+              endTime: 1580035097000,
+              mode: 'SUBWAY',
+              duration: 70.0,
+              distance: 507.91963524344703,
+              from: {
+                lon: 24.931215,
+                lat: 60.16883,
+                stop: {
+                  name: 'Kamppi',
+                },
+              },
+              to: {
+                lon: 24.939846,
+                lat: 60.170379,
+                stop: {
+                  name: 'Rautatientori',
+                },
+              },
+            },
+            {
+              startTime: 1580035097000,
+              endTime: 1580035327000,
+              mode: 'WALK',
+              duration: 230.0,
+              distance: 255.11499999999998,
+              from: {
+                lon: 24.939846,
+                lat: 60.170379,
+                stop: {
+                  name: 'Rautatientori',
+                },
+              },
+              to: {
+                lon: 24.941295,
+                lat: 60.171199,
+                stop: null,
+              },
+            },
+          ],
+        },
+        {
+          walkDistance: 586.7711538586675,
+          duration: 787,
+          legs: [
+            {
+              startTime: 1580034591000,
+              endTime: 1580035020000,
+              mode: 'WALK',
+              duration: 429.0,
+              distance: 460.9600000000001,
+              from: {
+                lon: 24.9257659,
+                lat: 60.1697351,
+                stop: null,
+              },
+              to: {
+                lon: 24.93143,
+                lat: 60.16795,
+                stop: {
+                  name: 'Kampintori',
+                },
+              },
+            },
+            {
+              startTime: 1580035020000,
+              endTime: 1580035260000,
+              mode: 'TRAM',
+              duration: 240.0,
+              distance: 680.3706567305292,
+              from: {
+                lon: 24.93143,
+                lat: 60.16795,
+                stop: {
+                  name: 'Kampintori',
+                },
+              },
+              to: {
+                lon: 24.9413,
+                lat: 60.17036,
+                stop: {
+                  name: 'Rautatieasema',
+                },
+              },
+            },
+            {
+              startTime: 1580035260000,
+              endTime: 1580035378000,
+              mode: 'WALK',
+              duration: 118.0,
+              distance: 125.47000000000001,
+              from: {
+                lon: 24.9413,
+                lat: 60.17036,
+                stop: {
+                  name: 'Rautatieasema',
+                },
+              },
+              to: {
+                lon: 24.941295,
+                lat: 60.171199,
+                stop: null,
+              },
+            },
+          ],
+        },
+        {
+          walkDistance: 972.2033846315379,
+          duration: 841,
+          legs: [
+            {
+              startTime: 1580034564000,
+              endTime: 1580035405000,
+              mode: 'WALK',
+              duration: 841.0,
+              distance: 971.7629999999999,
+              from: {
+                lon: 24.9257659,
+                lat: 60.1697351,
+                stop: null,
+              },
+              to: {
+                lon: 24.941295,
+                lat: 60.171199,
+                stop: null,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
 
 class Timetables extends React.Component {
   constructor() {
     super();
-    this.state = { testing: testData };
+    this.state = { testing: testData2 };
   }
 
   render() {
     return (
       <div id="timetables">
-        <Row>
-          <Itinerary data={this.state.testing} />
+        <Row className="itinerary">
+          <Itinerary data={this.state.testing.data.plan.itineraries[0]} />
+        </Row>
+        <Row className="itinerary">
+          <Itinerary data={this.state.testing.data.plan.itineraries[1]} />
+        </Row>
+        <Row className="itinerary">
+          <Itinerary data={this.state.testing.data.plan.itineraries[2]} />
         </Row>
       </div>
     );

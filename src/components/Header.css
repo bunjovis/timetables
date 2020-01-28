@@ -1,5 +1,6 @@
 header {
+  flex: 0 0 100%;
   min-height: 20vh;
-  min-width: 100vw;
   margin: 0 auto;
+  background-color: rgb(85, 79, 79) !important;
 }
