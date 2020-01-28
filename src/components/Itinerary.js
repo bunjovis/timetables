@@ -1,5 +1,12 @@
 import React from 'react';
 import Col from 'react-bootstrap/Col';
+import {
+  createFromString,
+  createToString,
+  createTimeString,
+  createLegMapString,
+} from '../helpers/ItineraryHelpers';
+// Import logos for different transport methods
 import walk from './img/walk.svg';
 import tram from './img/tram.svg';
 import bus from './img/bus.svg';
@@ -12,9 +19,12 @@ const logos = {
   BUS: bus,
   SUBWAY: subway,
 };
+
 const Itinerary = props => {
+  // Get one itinerary as prop
   const itinerary = props.data;
-  return itinerary.legs.map((leg, key) => {
+  return itinerary.legs.map(leg => {
+    // Create different strings to use in jsx
     const startDateString = createTimeString(new Date(leg.startTime));
     const endDateString = createTimeString(new Date(leg.endTime));
     const fromString = createFromString(leg.from);
@@ -22,7 +32,7 @@ const Itinerary = props => {
     const durationString = `${Math.ceil(leg.duration / 60)} min`;
     const legMapString = createLegMapString(leg);
     return (
-      <Col key={key} className="leg">
+      <Col key={leg} className="leg">
         <div>
           <img
             src={logos[leg.mode]}
@@ -49,26 +59,5 @@ const Itinerary = props => {
     );
   });
 };
-function createFromString(from) {
-  // If stop is null, the location must be Eficode headquarters since all other legs start from a stop
-  if (from.stop == null) {
-    return `Eficode headquarters`;
-  }
-  return from.stop.name;
-}
-function createToString(to) {
-  // If stop is null, the location must be Helsinki train station
-  if (to.stop == null) {
-    return `Helsinki railway station`;
-  }
-  return to.stop.name;
-}
-function createTimeString(time) {
-  return `${time.getHours() < 10 ? `0${time.getHours()}` : time.getHours()}:${
-    time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes()
-  }`;
-}
-function createLegMapString(leg) {
-  return `https://www.mapquestapi.com/staticmap/v5/map?key=HVMFDycJdaaG0wJGrEKizGFJO5wyWrfp&size=200,200&locations=${leg.from.lat},${leg.from.lon}|marker-start||${leg.to.lat},${leg.to.lon}|marker-end`;
-}
+
 export default Itinerary;

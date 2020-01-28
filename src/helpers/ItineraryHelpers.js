@@ -13,10 +13,12 @@ export function createToString(to) {
   return to.stop.name;
 }
 export function createTimeString(time) {
+  // Creates a time string from Date. Adds the extra '0' in case hours or minutes are under 10
   return `${time.getHours() < 10 ? `0${time.getHours()}` : time.getHours()}:${
     time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes()
   }`;
 }
 export function createLegMapString(leg) {
+  // Gets a static map from mapquestapi
   return `https://www.mapquestapi.com/staticmap/v5/map?key=HVMFDycJdaaG0wJGrEKizGFJO5wyWrfp&size=200,200&locations=${leg.from.lat},${leg.from.lon}|marker-start||${leg.to.lat},${leg.to.lon}|marker-end`;
 }
