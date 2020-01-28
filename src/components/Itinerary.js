@@ -23,7 +23,7 @@ const logos = {
 const Itinerary = props => {
   // Get one itinerary as prop
   const itinerary = props.data;
-  return itinerary.legs.map(leg => {
+  return itinerary.legs.map((leg, key) => {
     // Create different strings to use in jsx
     const startDateString = createTimeString(new Date(leg.startTime));
     const endDateString = createTimeString(new Date(leg.endTime));
@@ -32,7 +32,7 @@ const Itinerary = props => {
     const durationString = `${Math.ceil(leg.duration / 60)} min`;
     const legMapString = createLegMapString(leg);
     return (
-      <Col key={leg} className="leg">
+      <Col key={key} className="leg">
         <div>
           <img
             src={logos[leg.mode]}
